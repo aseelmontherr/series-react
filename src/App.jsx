@@ -1,21 +1,24 @@
+
 import Header from "./components/Header";
-import SeriesCard from "./components/SeriesCard";
+import SeriesList from "./components/SeriesList";
+import { platform, series } from "./data/series.js";
 
 function App() {
   return (
-    <div>
-      <Header platform="SeriesHub" count={5} />
-
-      <SeriesCard
-        title="Code Red"
-        genre="Thriller"
-        startYear={2020}
-        creator="Noam Shalev"
-        ended={true}
-        nextYear={undefined}
-        seasons={[1, 2, 3]}
+    <>
+      <Header
+        platform={platform}
+        count={series.length}
       />
-    </div>
+
+      <main className="page">
+        <h2 className="page__title">
+          הסדרות ({series.length})
+        </h2>
+
+        <SeriesList series={series} />
+      </main>
+    </>
   );
 }
 
