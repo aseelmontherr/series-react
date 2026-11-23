@@ -1,5 +1,6 @@
 export const platform = "SeriesHub";
 
+import { platform, series } from "./data/series.js";
 export const series = [
   {
     id: 1,
