@@ -1,3 +1,6 @@
+import { useState } from "react";
+import SeasonList from "./SeasonList";
+
 function SeriesCard({
   title,
   genre,
@@ -7,8 +10,10 @@ function SeriesCard({
   nextYear,
   seasons
 }) {
+  const [saved, setSaved] = useState(false);
+  const [showEpisodes, setShowEpisodes] = useState(false);
   return (
-    <article className="series-card">
+    <article className={`series-card ${saved ? "series-card--saved" : ""}`}>
       <div className="series-card__top">
         <h2 className="series-card__title">{title}</h2>
 
@@ -38,6 +43,28 @@ function SeriesCard({
           עונה חדשה ב-{nextYear}
         </p>
       )}
+
+
+<div className="series-card__actions">
+  <button
+    className="btn"
+    onClick={() => setSaved(!saved)}
+  >
+    {saved ? "★ שמורה" : "☆ לשמור"}
+  </button>
+
+  <button
+    className="btn"
+    onClick={() => setShowEpisodes(!showEpisodes)}
+  >
+    {showEpisodes ? "הסתר פרקים" : "הצג פרקים"}
+  </button>
+</div>
+
+{showEpisodes && (
+  <SeasonList seasons={seasons} />
+)}
+
     </article>
   );
 }
