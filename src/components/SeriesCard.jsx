@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import SeasonList from "./SeasonList";
 
@@ -8,14 +9,18 @@ function SeriesCard({
     creator,
     ended,
     nextYear,
-    seasons
+    seasons,
+    saved,
+    onToggleSave
 }) {
-    const [saved, setSaved] = useState(false);
     const [showEpisodes, setShowEpisodes] = useState(false);
+
     return (
         <article className={`series-card ${saved ? "series-card--saved" : ""}`}>
             <div className="series-card__top">
-                <h2 className="series-card__title">{title}</h2>
+                <h2 className="series-card__title">
+                    {title}
+                </h2>
 
                 {ended ? (
                     <span className="badge badge--ended">
@@ -35,7 +40,7 @@ function SeriesCard({
             <p className="series-card__meta">
                 {seasons.length > 0
                     ? `${seasons.length} עונות`
-                    : "אין עונות"}
+                    : "עוד אין עונות"}
             </p>
 
             {nextYear != null && (
@@ -44,11 +49,10 @@ function SeriesCard({
                 </p>
             )}
 
-
             <div className="series-card__actions">
                 <button
                     className="btn"
-                    onClick={() => setSaved(!saved)}
+                    onClick={onToggleSave}
                 >
                     {saved ? "★ שמורה" : "☆ לשמור"}
                 </button>
@@ -64,7 +68,6 @@ function SeriesCard({
             {showEpisodes && (
                 <SeasonList seasons={seasons} />
             )}
-
         </article>
     );
 }

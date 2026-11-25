@@ -7,6 +7,17 @@ import { platform, series } from "./data/series.js";
 function App() {
   const [onlyRunning, setOnlyRunning] = useState(false);
   const [sortByYear, setSortByYear] = useState(false);
+  const [savedIds, setSavedIds] = useState([]);
+
+  const toggleSave = (id) => {
+    setSavedIds(previousIds => {
+      if (previousIds.includes(id)) {
+        return previousIds.filter(item => item !== id);
+      } else {
+        return [...previousIds, id];
+      }
+    });
+  };
 
   let displayedSeries = [...series];
 
@@ -27,10 +38,10 @@ function App() {
       <Header
         platform={platform}
         count={series.length}
+        savedCount={savedIds.length}
       />
 
       <main className="page">
-
         <div className="toolbar">
           <button
             className={onlyRunning ? "btn btn--active" : "btn"}
@@ -51,8 +62,11 @@ function App() {
           הסדרות ({displayedSeries.length})
         </h2>
 
-        <SeriesList series={displayedSeries} />
-
+        <SeriesList
+          series={displayedSeries}
+          savedIds={savedIds}
+          onToggleSave={toggleSave}
+        />
       </main>
     </>
   );
