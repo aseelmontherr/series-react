@@ -1,16 +1,49 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+# SeriesHub
 
-Currently, two official plugins are available:
+SeriesHub is a React application for displaying and managing
+a TV series catalog. Users can save series, view seasons and
+episodes, vote for episodes, filter running series, and sort
+series by their starting year.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Installation and Running
 
-## React Compiler
+Install the required dependencies:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+```
 
-## Expanding the Oxlint configuration
+Start the development server:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```bash
+npm run dev
+```
+
+## Questions and Answers
+
+### 1. Why did the screen not update in Bug #3, and what does useState do differently?
+
+The votes variable was a regular JavaScript variable.
+Changing its value did not cause React to re-render
+the component.
+Using useState allows React to store the component's state
+and update the displayed value when setVotes is called.
+
+### 2. Which key did I choose in SeriesList, and why should the array index not be used?
+
+I used the unique ID of each series as its key.
+The ID remains constant even when the list is filtered
+or sorted.
+Using the array index as a key may cause React to associate
+the component's state with the wrong series when the order
+of the list changes.
+
+### 3. Why did I sort a copy of the array in Part C3?
+
+The sort() method modifies the original array.
+I created a copy using the spread operator to preserve
+the original data.
+If I had sorted the original series array directly,
+the original order would have been lost when turning
+off the sorting option.
